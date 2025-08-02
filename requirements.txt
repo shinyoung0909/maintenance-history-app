@@ -8,6 +8,6 @@ tiktoken
 plotly
 langchain
 langchain-community
-chromadb[server]
+chromadb[server]==0.4.24
 matplotlib
 
