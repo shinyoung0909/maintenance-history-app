@@ -1,13 +1,19 @@
-streamlit
-pyngrok
-pandas
-numpy
-openai
-openpyxl
-tiktoken
-plotly
-langchain
-langchain-community
-chromadb[server]==0.4.24
-matplotlib
+# Streamlit 앱 구동 필수
+streamlit==1.35.0
+pandas==2.2.2
+numpy==1.26.4
+matplotlib==3.8.4
+plotly==5.22.0
+openpyxl==3.1.2  # 엑셀 업로드용
+
+# LangChain 및 OpenAI
+langchain==0.1.16
+langchain-community==0.0.36
+langchain-core==0.1.50
+openai==1.33.0
+tiktoken==0.7.0
+
+# FAISS (CPU 버전)
+faiss-cpu==1.7.4
+
 

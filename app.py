@@ -1,4 +1,5 @@
-# app.py
+# ✅ 변경 내용 적용된 전체 app.py 코드
+
 import os
 import pandas as pd
 import numpy as np
@@ -12,7 +13,7 @@ import time
 from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS  # ✅ FAISS로 교체
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 
@@ -104,10 +105,18 @@ for cause, actions in cause_action_counts.items():
 df_success = pd.DataFrame(rows)
 
 # LangChain RAG
+
+# 문서 및 벡터 DB 구성
 documents = [Document(page_content=str(row['정비노트']), metadata={'row': idx}) for idx, row in df.iterrows()]
 split_docs = CharacterTextSplitter(chunk_size=500, chunk_overlap=50).split_documents(documents)
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
-vectordb = Chroma.from_documents(documents=split_docs, embedding=embedding_model)
+
+if os.path.exists("faiss_index"):
+    vectordb = FAISS.load_local("faiss_index", embedding_model)
+else:
+    vectordb = FAISS.from_documents(split_docs, embedding=embedding_model)
+    vectordb.save_local("faiss_index")
+
 llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
 qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=vectordb.as_retriever(search_kwargs={'k': 20}), return_source_documents=True)
 
