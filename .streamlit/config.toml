@@ -1,0 +1,8 @@
+[layout]
+wideMode = true
+
+[theme]
+base = "light"
+
+[ui]
+showStreamlitMark = false
