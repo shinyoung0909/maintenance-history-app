@@ -1,0 +1,10 @@
+streamlit
+pyngrok
+pandas
+numpy
+openai
+tiktoken
+plotly
+langchain
+langchain-community
+chromadb
