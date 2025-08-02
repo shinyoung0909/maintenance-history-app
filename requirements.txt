@@ -3,9 +3,11 @@ pyngrok
 pandas
 numpy
 openai
+openpyxl
 tiktoken
 plotly
 langchain
 langchain-community
 chromadb
 matplotlib
+
